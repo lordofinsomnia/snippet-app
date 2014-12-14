@@ -84,5 +84,13 @@ RSpec.describe "Snippets", :type => :request do
   		page.should have_no_content 'testsnippet.rb'
   		page.should have_no_content 'test snippet'  		
   	end
+
+  	it "should be sign up and sign in" do
+  		visit snippets_path
+  		page.should have_content 'Sign In'
+  		page.should have_content 'Sign Up'
+  	end
+
+
   end
 end
