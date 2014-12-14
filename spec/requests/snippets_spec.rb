@@ -15,9 +15,8 @@ RSpec.describe "Snippets", :type => :request do
 	end
 
   describe "GET /snippets" do
-    it "display some snippets" do 
-    	
-
+    
+    it "display some snippets" do     
     	visit snippets_path
     	page.should have_content 'test snippet'      
     end
@@ -31,6 +30,8 @@ RSpec.describe "Snippets", :type => :request do
     	current_path.should == snippets_path
     	page.should have_content 'testsnippet.rb'
     	page.should have_content 'test snippet'
+
+    	page.should have_content 'Your snippet has successfully been added.'
     end
   end
 
@@ -53,7 +54,9 @@ RSpec.describe "Snippets", :type => :request do
     	current_path.should == snippets_path
 
     	page.should have_content 'testsnippet1.rb'
-    	page.should have_content 'update snippet'
+    	page.should have_content 'update snippet'    	
+
+    	page.should have_content 'There was an error updating your snippet.'
   	end
   	
   	it "should not update an empty snippet" do

@@ -6,7 +6,7 @@ class SnippetsController < ApplicationController
 
   def create
     @snippet = Snippet.create(params[:snippet].permit(:filename, :content))
-    redirect_to :back
+    redirect_to :back, :notice => 'Your snippet has successfully been added.'
   end
 
   def edit
