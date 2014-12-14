@@ -39,7 +39,7 @@ RSpec.describe "Snippets", :type => :request do
   	
   	it "edits a snippet" do
   		visit snippets_path
-  		find("#snippet_#{@snippet.id}").click_link 'Edit'
+  		find("#snippet_edit_#{@snippet.id}").click_link 'Edit'
 
   		current_path.should == edit_snippet_path(@snippet)
 
@@ -61,7 +61,7 @@ RSpec.describe "Snippets", :type => :request do
   	
   	it "should not update an empty snippet" do
   		visit snippets_path
-  		find("#snippet_#{@snippet.id}").click_link 'Edit'
+  		find("#snippet_edit_#{@snippet.id}").click_link 'Edit'
 
   		find_field('Filename').value.should == 'testsnippet.rb'
     	find_field('Content').value.should == 'test snippet'
@@ -76,6 +76,18 @@ RSpec.describe "Snippets", :type => :request do
 
 			current_path.should == edit_snippet_path(@snippet)
 			page.should have_content 'There was an error updating your snippet.'
+  	end
+  end
+
+  describe "GET /snippets" do
+  	
+  	it "should delete a snippet" do
+  		visit snippets_path
+  		find("#snippet_delete_#{@snippet.id}").click_link 'Delete'
+  		page.should have_content 'Your snippet has successfully been deleted.'
+
+  		page.should have_no_content 'testsnippet.rb'
+  		page.should have_no_content 'test snippet'  		
   	end
   end
 end

@@ -23,6 +23,11 @@ class SnippetsController < ApplicationController
   	end
   end
 
+  def destroy
+  	Snippet.destroy params[:id]	
+  	redirect_to :back, :notice => 'Your snippet has successfully been deleted.'
+  end
+
   private
 		def snippet_params
 		  params.require(:filename, :content).permit(:filename, :content)
