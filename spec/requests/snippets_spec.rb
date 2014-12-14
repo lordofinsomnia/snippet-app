@@ -17,5 +17,20 @@ RSpec.describe "Snippets", :type => :request do
     	visit snippets_path
     	page.should have_content 'test snippet'      
     end
+
+    it "creates a new snippet" do
+    	visit snippets_path
+    	fill_in 'Filename', :with => 'testsnippet.rb'
+    	fill_in 'Content', :with => 'test snippet'
+    	click_button 'Create Snippet'
+
+    	current_path.should == snippets_path
+    	page.should have_content 'testsnippet.rb'
+    	page.should have_content 'test snippet'
+
+
+    end
+
+
   end
 end
