@@ -1,0 +1,28 @@
+<table>
+	<%= form_for @snippet do |f| %>		
+		<tr>
+			<th>
+				<%= f.label :filename %>	
+			</th>
+			<th>
+				<%= f.text_field :filename, :size => "40"%>	
+			</th>
+		</tr>	
+
+		<tr>
+			<th>
+				<%= f.label :content %>
+			</th>
+			<th>
+				<%= f.text_area :content, :size => "30x10" %>
+			</th>		
+		</tr>
+
+		<tr>
+			<th>
+				<%= f.submit %>
+			</th>
+		</tr>	
+	<% end %>
+</table>
+
