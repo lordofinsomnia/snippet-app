@@ -32,9 +32,6 @@ RSpec.describe "Snippets", :type => :request do
     	page.should have_content 'testsnippet.rb'
     	page.should have_content 'test snippet'
     end
-  end
-
-  describe "GET /snippets" do
   	
   	it "edits a snippet" do
   		visit snippets_path
@@ -74,12 +71,9 @@ RSpec.describe "Snippets", :type => :request do
 
 			current_path.should == edit_snippet_path(@snippet)
 			page.should have_content 'There was an error updating your snippet.'
-  	end
-  end
+  	end  
 
-  describe "GET /snippets" do
-  	
-  	it "should delete a snippet" do
+		it "should delete a snippet" do
   		visit snippets_path
   		find("#snippet_delete_#{@snippet.id}").click_link 'Delete'
   		page.should have_content 'Your snippet has successfully been deleted.'
