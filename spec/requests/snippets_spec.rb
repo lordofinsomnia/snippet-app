@@ -8,22 +8,21 @@ module ::RSpec::Core
 end
 
 RSpec.describe "Snippets", :type => :request do
-	before do
-		@snippet = Snippet.create :filename => 'testsnippet.rb',
-    														:content => 'test snippet',
-    														:output => ''
-	end
+	
 
   describe "GET /snippets" do
-    
-    it "display some snippets" do     
-    	visit snippets_path
+	  before do
+			@snippet = Snippet.create :filename => 'testsnippet.rb',
+	    														:content => 'test snippet',
+	    														:output => ''
+			visit snippets_path	    											
+		end  
+    it "display some snippets" do         	
     	page.should have_content 'testsnippet.rb'
     	page.should have_content 'test snippet'      
     end
 
-    it "creates a new snippet" do
-    	visit snippets_path
+    it "creates a new snippet" do    	
     	fill_in 'Filename', :with => 'testsnippet.rb'
     	fill_in 'Content', :with => 'test snippet'
     	click_button 'Create Snippet'
@@ -35,8 +34,7 @@ RSpec.describe "Snippets", :type => :request do
     	page.should have_content 'Your snippet has successfully been added.'
     end
   	
-  	it "edits a snippet" do
-  		visit snippets_path
+  	it "edits a snippet" do  		
   		find("#snippet_edit_#{@snippet.id}").click_link 'Edit'
 
   		current_path.should == edit_snippet_path(@snippet)
@@ -57,8 +55,7 @@ RSpec.describe "Snippets", :type => :request do
     	page.should have_content 'Your snippet has successfully been updated.'
   	end
   	
-  	it "should not update an empty snippet" do
-  		visit snippets_path
+  	it "should not update an empty snippet" do  		
   		find("#snippet_edit_#{@snippet.id}").click_link 'Edit'
 
   		find_field('Filename').value.should == 'testsnippet.rb'
@@ -76,8 +73,7 @@ RSpec.describe "Snippets", :type => :request do
 			page.should have_content 'There was an error updating your snippet.'
   	end  
 
-		it "should delete a snippet" do
-  		visit snippets_path
+		it "should delete a snippet" do  		
   		find("#snippet_delete_#{@snippet.id}").click_link 'Delete'
   		page.should have_content 'Your snippet has successfully been deleted.'
 
@@ -85,12 +81,10 @@ RSpec.describe "Snippets", :type => :request do
   		page.should have_no_content 'test snippet'  		
   	end
 
-  	it "should be sign up and sign in" do
-  		visit snippets_path
-  		page.should have_content 'Sign In'
+  	it "should be sign up and sign in" do  		
   		page.should have_content 'Sign Up'
+  		page.should have_content 'Sign In'  		
   	end
-
-
+ 
   end
 end
