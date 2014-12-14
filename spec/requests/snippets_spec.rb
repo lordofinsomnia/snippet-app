@@ -9,7 +9,11 @@ end
 
 RSpec.describe "Snippets", :type => :request do
   describe "GET /snippets" do
-    it "display some snippets" do    	
+    it "display some snippets" do 
+    	@snippet = Snippet.create :filename => 'testsnippet.rb',
+    														:content => 'test snippet',
+    														:output => ''
+
     	visit snippets_path
     	page.should have_content 'test snippet'      
     end

@@ -1,2 +1,18 @@
-<h1>Snippets#index</h1>
-<p>Find me in app/views/snippets/index.html.erb</p>
+<h1>Snippets</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Filename</th>
+    <th>Content</th>
+    <th>Output</th>
+  </tr>
+  <% for snippet in @snippets %>
+		<tr>
+			<td><%= snippet.id %></td>
+			<td><%= snippet.filename %></td>
+			<td><%= snippet.content %></td>
+			<td><%= snippet.output %></td>
+		</tr>
+	<% end %>
+
