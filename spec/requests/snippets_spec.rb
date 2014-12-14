@@ -1,10 +1,17 @@
 require 'rails_helper'
 
+module ::RSpec::Core
+  class ExampleGroup
+    include Capybara::DSL
+    include Capybara::RSpecMatchers
+  end
+end
+
 RSpec.describe "Snippets", :type => :request do
   describe "GET /snippets" do
-    it "works! (now write some real specs)" do
-      get snippets_index_path
-      expect(response).to have_http_status(200)
+    it "display some snippets" do    	
+    	visit snippets_path
+    	page.should have_content 'test snippet'      
     end
   end
 end
