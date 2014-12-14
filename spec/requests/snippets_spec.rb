@@ -18,6 +18,7 @@ RSpec.describe "Snippets", :type => :request do
     
     it "display some snippets" do     
     	visit snippets_path
+    	page.should have_content 'testsnippet.rb'
     	page.should have_content 'test snippet'      
     end
 
