@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   resources :home
   resources :snippets
+  resources :users
 
 
   # You can have the root of your site routed with "root"
-  root to: "snippets#index"
+  root to: 'visitors#index'
 
 
   # Example of regular route:
