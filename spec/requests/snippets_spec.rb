@@ -81,5 +81,15 @@ RSpec.describe "Snippets", :type => :request do
   		page.should have_no_content 'test snippet'  		
   	end
 
+    it "should be able to upload a snippet" do
+      #click_button 'Choose File'
+      #bulk_json = fixture_file_upload('files/hello_world.rb','Mime::TEXT')
+      #attach_file('hello_world.rb', '#{Rails.root}/files/hello_world.rb')      
+      testsnippet = File.new(Rails.root + 'files/hello_world.rb')
+      click_button 'preview'
+
+
+    end
+
   end
 end

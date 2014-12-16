@@ -6,17 +6,40 @@ class SnippetsController < ApplicationController
 
   def create
     @snippet = Snippet.create(params[:snippet].permit(:filename, :content))
+    uploaded_io = params[:file]        
+    
+    filename = Rails.root.join('files', 'uploads', uploaded_io.original_filename)
+    File.open(filename, 'wb') do |file|
+      file.write(uploaded_io.read)      
+      @snippet.filename = uploaded_io.original_filename      
+    end    
+    File.open(filename, 'rb') do |file2|      
+      @snippet.content = file2.read      
+      File.delete(file2)      
+    end  
     redirect_to :back, :notice => 'Your snippet has successfully been added.'
   end
 
   def edit
-  	@snippet = Snippet.find params[:id]
+  	@snippet = Snippet.find params[:
   end
+
 
   def update 	
   	snippet = Snippet.find params[:id]
-  	logger.debug 'test1'  	
-  	if snippet.update(params[:snippet].permit(:filename, :content))  	
+  	uploaded_io = params[:file]        
+    
+    filename = Rails.root.join('files', 'uploads', uploaded_io.original_filename)
+    File.open(filename, 'wb') do |file|
+      file.write(uploaded_io.read)      
+      snippet.filename = uploaded_io.original_filename      
+    end    
+    File.open(filename, 'rb') do |file2|      
+      snippet.content = file2.read      
+      File.delete(file2)      
+    end  
+
+  	if snippet.update(params[:snippet].permit(uploaded_io.original_filename, snippet.content))  	    
   		redirect_to snippets_path, :notice => 'Your snippet has successfully been updated.'
   	else  		
   		redirect_to :back, :notice => 'There was an error updating your snippet.'
