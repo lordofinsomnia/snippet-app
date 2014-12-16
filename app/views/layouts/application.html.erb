@@ -1,29 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>SnippetApp</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<% flash.each do |name, message| %>
-<%= content_tag :div, message, :id => "flash_#{name}" %>
-<% end %>
-
-<div id='user_nav'>
-	<% if user_signed_in? %>
-        Signed in as <%= current_user.email %>. Not you?
-        <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
-    <% else %>
-        <%= link_to "Sign Up", new_user_registration_path %> or <%= link_to "Sign In", new_user_session_path  %>
-    <% end %>
-</div>
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-<%= yield %>
-
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Snippet App" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Snippet App" %>">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+       <%= render 'layouts/messages' %>
+       <%= yield %>
+    </main>
+  </body>
 </html>
