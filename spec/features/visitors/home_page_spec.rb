@@ -18,21 +18,20 @@ feature 'Home page' do
     expect(page).to have_content 'Users count'
   end
 
-=begin
+
 	scenario 'see all users we have' do
     visit root_path
-        
-    #find("Users count").click_link 'Users count'
-    click_button 'Users count'
-    expect(page).to have_content 'All users'
+    click_link 'Users count'
+    current_path.should == new_user_session_path
+		expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end  
 
   scenario 'see how many snippets we have' do
     visit root_path
-    click_button 'Snippets count'
-    expect(page).to have_content 'Snippets count'
+    click_link 'Snippets count'    
+    current_path.should == snippets_path
+		expect(page).to have_content 'All snippets'
   end
-=end
 
 
 end
