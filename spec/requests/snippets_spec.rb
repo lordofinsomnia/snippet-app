@@ -54,6 +54,7 @@ RSpec.describe "Snippets", :type => :request do
 
     	page.should have_content 'testsnippet1.rb'
     	page.should have_content 'update snippet'
+    	page.should have_content 'Your snippet has successfully been updated.'
   	end
   	
   	it "should not update an empty snippet" do
