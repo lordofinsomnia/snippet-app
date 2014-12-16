@@ -72,7 +72,7 @@ RSpec.describe "Snippets", :type => :request do
 			page.should have_content 'There was an error updating your snippet.'
   	end  
 
-		it "should delete a snippet" do  		
+		it "should delete a snippet" do
   		find("#snippet_delete_#{@snippet.id}").click_link 'Delete'
   		page.should have_content 'Your snippet has successfully been deleted.'
 
