@@ -21,6 +21,7 @@ RSpec.describe "Snippets", :type => :request do
     	
 
     	page.should have_content 'testsnippet.rb'
+    	page.should have_content 'testsnippet.rb'
     	page.should have_content 'test snippet'      
     end
 
