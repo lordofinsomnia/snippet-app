@@ -72,15 +72,21 @@ RSpec.describe "Snippets", :type => :request do
 			current_path.should == edit_snippet_path(@snippet)
 			page.should have_content 'There was an error updating your snippet.'
   	end  
-=begin
+
 		it "should delete a snippet" do  		
   		find("#snippet_delete_#{@snippet.id}").click_link 'Delete'
   		page.should have_content 'Your snippet has successfully been deleted.'
 
   		page.should have_no_content 'testsnippet.rb'
   		page.should have_no_content 'test snippet'  		
-  	end  	
-=end
+  	end
+
+    it "should be able to upload a snippet" do
+      testsnippet = File.new(Rails.root + 'files/hello_world.rb')
+      click_button 'Create Snippet'
+      page.should have_no_content 'hello_world.rb'
+      page.should have_no_content 'puts \'Hello, world!\''
+    end
 
   end
 end
