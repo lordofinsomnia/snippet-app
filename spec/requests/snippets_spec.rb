@@ -88,5 +88,12 @@ RSpec.describe "Snippets", :type => :request do
       page.should have_no_content 'puts \'Hello, world!\''
     end
 
+    it "should view detail of a snippet" do
+      find("#snippet_show_#{@snippet.id}").click_link 'Show'
+      current_path.should == snippet_path(@snippet)
+      expect(page).to have_content 'Snippet details'
+    end
+
+
   end
 end

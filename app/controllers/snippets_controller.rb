@@ -16,6 +16,10 @@ class SnippetsController < ApplicationController
   	@snippet = Snippet.find params[:id]
   end
 
+  def show
+    @snippet = Snippet.find params[:id]
+  end
+
   def update 	
   	snippet       = Snippet.find params[:id]     
     new_content   = find_file_content
