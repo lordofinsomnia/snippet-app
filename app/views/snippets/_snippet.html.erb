@@ -6,4 +6,22 @@
 	<%= label_tag :file, 'upload a snippet' %>
 	<%= file_field_tag :file %>
 	<%= f.submit %>
-<% end %>
+
+	<p>
+	Comments:
+	<% @snippet.comments.each do |comment| %>
+		<p>
+	    <%= comment.label :commenter %><br>
+	    <%= comment.text_field :commenter %>
+	  </p>
+	  <p>
+	    <%= comment.label :body %><br>
+	    <%= comment.text_area :body %>
+	  </p>
+	  <p>
+	<% end %>
+	</p>
+
+		
+		
+<% end %>	

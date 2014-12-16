@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-  resources :snippets
-  resources :comments
+  resources :snippets do
+  	resources :comments
+  end
 
 end

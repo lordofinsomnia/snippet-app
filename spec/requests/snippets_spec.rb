@@ -96,10 +96,11 @@ RSpec.describe "Snippets", :type => :request do
 
     it "should add comment to a snippet" do
       find("#snippet_show_#{@snippet.id}").click_link 'Show'
-      current_path.should == snippet_path(@snippet)
+      current_path.should == snippet_path(@snippet)      
+
       expect(page).to have_content 'Snippet details'
 
-      fill_in 'Comment', :with => 'Is this working?'
+      fill_in 'New comment', :with => 'Is this working?'
 
       click_button 'Add comment'
       
