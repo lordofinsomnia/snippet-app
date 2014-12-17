@@ -7,9 +7,8 @@ class SnippetsController < ApplicationController
   def create
     @snippet           = Snippet.create(params[:snippet].permit(:filename, :content))  
     @snippet.content   = find_file_content
-    @snippet.filename  = find_filename
-
-    redirect_to :back, :notice => 'Your snippet has successfully been added.'
+    @snippet.filename  = find_filename    
+    redirect_to @snippet, :notice => 'Your snippet has successfully been added.'
   end
 
   def edit
@@ -26,7 +25,7 @@ class SnippetsController < ApplicationController
     new_name      = find_filename
 
   	if snippet.update(params[:snippet].permit(new_name, new_content))  	    
-  		redirect_to snippets_path, :notice => 'Your snippet has successfully been updated.'
+  		redirect_to snippet, :notice => 'Your snippet has successfully been updated.'
   	else  		
   		redirect_to :back, :notice => 'There was an error updating your snippet.'
   	end

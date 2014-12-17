@@ -103,6 +103,8 @@ RSpec.describe "Snippets", :type => :request do
       fill_in 'New comment', :with => 'Is this working?'
 
       click_button 'Add comment'
+
+      current_path.should == snippet_path(@snippet)
       
       find_field('Comment').value.should == 'Is this working?'
       expect(page).to have_content 'Your comment has successfully been added.'

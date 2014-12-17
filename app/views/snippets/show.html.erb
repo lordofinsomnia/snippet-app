@@ -1,21 +1,31 @@
 <h2>Snippet details</h2>
 <%= form_for @snippet, :html => {:multipart => true} do |f| %>
-	<%= f.label :filename %>			
-	<%= f.text_field :filename, :size => "40"%>			
-	<%= f.label :content %>
-	<%= f.text_area :content, :size => "30x10" %>	  
-	<%= label_tag :file, 'upload a snippet' %>
-	<%= file_field_tag :file %>
-	<%= f.submit %>				
-
-	<%= form_for [@snippet, @snippet.comments.build] do |comment| %>		
-		<%= comment.label :body, 'Comment' %>
-		<%= comment.text_area :body, :size => "30x10" %>	
-		<%= comment.submit %>	  
+	<p><%= f.label :filename %></p>
+	<p><%= f.text_field :filename, :size => "40"%></p>
+	<p><%= f.label :content %></p>
+	<p><%= f.text_area :content, :size => "30x10" %></p>
+	<p><%= label_tag :file, 'upload a snippet' %></p>
+	<p><%= file_field_tag :file %></p>
+	<p><%= f.submit %></p>
+	<p>
+		<%= @snippet.comments.each do |comment| %>
+			<p>
+				<%= comment.commenter %> said @	<%= comment.created_at %>
+			  </p>
+				"<%= comment.body %>"
+		  </p>
+		<% end %>
+	</p>
+	
+<% end %>	
+<%= form_for [@snippet, @snippet.comments.build] do |comment2| %>		
+		<p><%= comment2.label :body, 'New comment' %></p>
+		<p><%= comment2.text_area :body, :size => "30x10" %></p>
+	<p><%= comment2.submit 'Add comment'  %></p>
 	<% end %>		
 
 
-<% end %>	
 
+	
 
-
+	
