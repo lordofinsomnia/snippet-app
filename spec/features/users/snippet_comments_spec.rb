@@ -10,16 +10,18 @@ feature 'Add snippet comment' do
   scenario 'add comment with valid user' do
     user = FactoryGirl.create(:user)
     login_as(user, :scope => :user)
+    @snippet = FactoryGirl.create(:snippet)
+
+    visit root_path
+    click_link 'Snippets count'    
+    current_path.should == snippets_path
+		expect(page).to have_content 'All snippets'
+		
+    find("#snippet_show_#{@snippet.id}").click_link 'Show'
     
 
-    snippet = Snippet.create :filename => 'testsnippet.rb',
-	    												:content => 'test snippet',
-	    												:output => ''
-		visit snippets_path
-    find("#snippet_show_#{snippet.id}").click_link 'Show'
-    current_path.should == snippet_path(@snippet)      
-
     expect(page).to have_content 'Snippet details'
+    current_path.should == snippet_path(@snippet)
 
     fill_in 'New comment', :with => 'Is this working?'
 
