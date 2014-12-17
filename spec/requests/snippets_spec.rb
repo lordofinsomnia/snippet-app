@@ -20,19 +20,7 @@ RSpec.describe "Snippets", :type => :request do
     it "display some snippets" do         	
     	page.should have_content 'testsnippet.rb'
     	page.should have_content 'test snippet'      
-    end
-
-    it "creates a new snippet" do    	
-    	fill_in 'Filename', :with => 'testsnippet.rb'
-    	fill_in 'Content', :with => 'test snippet'
-    	click_button 'Create Snippet'
-
-    	current_path.should == snippet_path(@snippet)
-    	page.should have_content 'testsnippet.rb'
-    	page.should have_content 'test snippet'
-
-    	page.should have_content 'Your snippet has successfully been added.'
-    end
+    end    
   	
   	it "edits a snippet" do  		
   		find("#snippet_edit_#{@snippet.id}").click_link 'Edit'

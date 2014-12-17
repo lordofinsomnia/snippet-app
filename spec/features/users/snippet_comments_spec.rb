@@ -1,7 +1,7 @@
 include Warden::Test::Helpers
 Warden.test_mode!
 
-feature 'Add snippet comment' do
+feature 'Snippets comment' do
 
   after(:each) do
     Warden.test_reset!
@@ -10,15 +10,12 @@ feature 'Add snippet comment' do
   scenario 'add comment with visitor' do
     @snippet = FactoryGirl.create(:snippet)
 
-    visit root_path
-    click_link 'Snippets count'    
-    current_path.should == snippets_path
-		expect(page).to have_content 'All snippets'
+    go_to_all_snippets
 		
     find("#snippet_show_#{@snippet.id}").click_link 'Show'    
 		
     expect(page).to have_content 'Snippet details'
-    current_path.should == snippet_path(@snippet)   
+    current_path.should == snippet_path(@snippet)
 
 		expect(page).to have_no_content 'New comment'
 		expect(page).to have_no_content 'Add comment'        
