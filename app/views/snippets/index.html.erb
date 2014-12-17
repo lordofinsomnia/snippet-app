@@ -16,9 +16,12 @@
 			<td><%= snippet.filename %></td>
 			<td><%= snippet.content %></td>
 			<td><%= snippet.output %></td>
-			<td id="snippet_show_<%= snippet.id %>" ><%= link_to 'Show', snippet_path(snippet)%></td><td>|</td>
-			<td id="snippet_edit_<%= snippet.id %>" ><%= link_to 'Edit', edit_snippet_path(snippet)%></td><td>|</td>
-			<td id="snippet_delete_<%= snippet.id %>" ><%= link_to 'Delete', snippet, :method => 'delete' %></td>
+			<td id="snippet_show_<%= snippet.id %>" ><%= link_to 'Show', snippet_path(snippet)%></td><td>
+			<% if user_signed_in? %>
+				|</td>
+				<td id="snippet_edit_<%= snippet.id %>" ><%= link_to 'Edit', edit_snippet_path(snippet)%></td><td>|</td>
+				<td id="snippet_delete_<%= snippet.id %>" ><%= link_to 'Delete', snippet, :method => 'delete' %></td>
+			<% end %>
 		</tr>
 	<% end %>
 </table>

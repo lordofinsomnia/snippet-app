@@ -27,7 +27,7 @@ RSpec.describe "Snippets", :type => :request do
     	fill_in 'Content', :with => 'test snippet'
     	click_button 'Create Snippet'
 
-    	current_path.should == snippets_path
+    	current_path.should == snippet_path(@snippet)
     	page.should have_content 'testsnippet.rb'
     	page.should have_content 'test snippet'
 
@@ -47,7 +47,7 @@ RSpec.describe "Snippets", :type => :request do
 
     	click_button 'Update Snippet'
 
-    	current_path.should == snippets_path
+    	current_path.should == snippet_path(@snippet)
 
     	page.should have_content 'testsnippet1.rb'
     	page.should have_content 'update snippet'    	
@@ -95,6 +95,8 @@ RSpec.describe "Snippets", :type => :request do
     end
 
     it "should add comment to a snippet" do
+      user = FactoryGirl.create(:user)
+      signin(user.email, user.password)
       find("#snippet_show_#{@snippet.id}").click_link 'Show'
       current_path.should == snippet_path(@snippet)      
 
@@ -104,10 +106,11 @@ RSpec.describe "Snippets", :type => :request do
 
       click_button 'Add comment'
 
-      current_path.should == snippet_path(@snippet)
-      
-      find_field('Comment').value.should == 'Is this working?'
       expect(page).to have_content 'Your comment has successfully been added.'
+      expect(page).to have_content 'Is this working?'
+
+      current_path.should == snippet_path(@snippet)          
+      
     end
 
 
