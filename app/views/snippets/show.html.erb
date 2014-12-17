@@ -6,26 +6,25 @@
 	<p><%= f.text_area :content, :size => "30x10" %></p>
 	<p><%= label_tag :file, 'upload a snippet' %></p>
 	<p><%= file_field_tag :file %></p>
-	<p><%= f.submit %></p>
-	<p>
-		<%= @snippet.comments.each do |comment| %>
-			<p>
-				<%= comment.commenter %> said @	<%= comment.created_at %>
-			  </p>
-				"<%= comment.body %>"
-		  </p>
-		<% end %>
-	</p>
-	
+	<p><%= f.submit %></p>	
 <% end %>	
+
+
+	
+
+<p>
+	<% @snippet.comments.each do |comment| %>
+		<p>
+			<%= comment.commenter %> @ <%= comment.created_at %>
+		  </p>
+			"<%= comment.body %>"			
+	  </p>	  
+	<% end %>
+</p>
+
+
 <%= form_for [@snippet, @snippet.comments.build] do |comment2| %>		
-		<p><%= comment2.label :body, 'New comment' %></p>
-		<p><%= comment2.text_area :body, :size => "30x10" %></p>
-	<p><%= comment2.submit 'Add comment'  %></p>
-	<% end %>		
-
-
-
-	
-
-	
+	<p><%= comment2.label :body, 'New comment' %></p>
+	<p><%= comment2.text_area :body, :size => "30x10" %></p>
+<p><%= comment2.submit 'Add comment'  %></p>
+<% end %>		
