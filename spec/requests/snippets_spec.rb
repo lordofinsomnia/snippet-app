@@ -20,19 +20,7 @@ RSpec.describe "Snippets", :type => :request do
     it "display some snippets" do         	
     	page.should have_content 'testsnippet.rb'
     	page.should have_content 'test snippet'      
-    end
-
-    it "creates a new snippet" do    	
-    	fill_in 'Filename', :with => 'testsnippet.rb'
-    	fill_in 'Content', :with => 'test snippet'
-    	click_button 'Create Snippet'
-
-    	current_path.should == snippets_path
-    	page.should have_content 'testsnippet.rb'
-    	page.should have_content 'test snippet'
-
-    	page.should have_content 'Your snippet has successfully been added.'
-    end
+    end    
   	
   	it "edits a snippet" do  		
   		find("#snippet_edit_#{@snippet.id}").click_link 'Edit'
@@ -47,7 +35,7 @@ RSpec.describe "Snippets", :type => :request do
 
     	click_button 'Update Snippet'
 
-    	current_path.should == snippets_path
+    	current_path.should == snippet_path(@snippet)
 
     	page.should have_content 'testsnippet1.rb'
     	page.should have_content 'update snippet'    	
@@ -88,5 +76,10 @@ RSpec.describe "Snippets", :type => :request do
       page.should have_no_content 'puts \'Hello, world!\''
     end
 
+    it "should view detail of a snippet" do
+      find("#snippet_show_#{@snippet.id}").click_link 'Show'
+      current_path.should == snippet_path(@snippet)
+      expect(page).to have_content 'Snippet details'
+    end
   end
 end
